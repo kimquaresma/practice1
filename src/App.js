@@ -40,6 +40,7 @@
 
 import React, {useState} from 'react';
 import axios from "axios";
+import {Card, Col, Container, Row} from "react-bootstrap";
 
 const App = () => {
     //1.데이터 담을 그릇 설정하기.
@@ -61,20 +62,30 @@ const App = () => {
         }
     }
     return (
-        <div>
+        <Container>
             {/*4. 데이터 display*/}
+            <Row>
 
             <h1>{sentences.length}</h1>
             {/*9. 1~100까지 자료 출력하기*/}
             {sentences && sentences.map(sentence => (
-                <div>
-                    <h1>{sentence.title}</h1>
-                    <h3>{sentence.body}</h3>
-                </div>
+                <Col className={"mt-5"}>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                        <Card.Title>{sentence.title.slice(0,50)}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                        <Card.Text>
+                            {sentence.body.slice(0,110)}
+                        </Card.Text>
 
+                    </Card.Body>
+                </Card>
+                </Col>
             ))}
             <button onClick={getSentences}>기사 가져오기</button>
-        </div>
+            </Row>
+
+        </Container>
     );
 };
 
